@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="zh">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<title>XinYu47 - 登录</title>
+	<link rel="icon" href="https://www.helloimg.com/i/2024/11/05/672993116b304.ico">
+	<link rel="stylesheet" type="text/css" href="/assets/css/Login.css">
+	<script>
+		const maxErrors = 5;
+				let errorContainer;
+				function createErrorContainer() {
+				    errorContainer = document.createElement("div");
+				    errorContainer.className = "error-container";
+				    document.body.appendChild(errorContainer);
+				}
+				function getCurrentTimePassword() {
+				    const now = new Date();
+				    const year = now.getFullYear();
+				    const month = (now.getMonth() + 1).toString().padStart(2, '0');
+				    const day = now.getDate().toString().padStart(2, '0');
+				    const hour = now.getHours().toString().padStart(2, '0');
+				    return `${year}${month}${day}${hour}`;
+				}
+				function validatePassword() {
+				    const inputPassword = document.getElementById("passwordInput").value;
+				    const generatedPassword = getCurrentTimePassword();
+				    if (inputPassword === generatedPassword) {
+				document.querySelector('.rectangle.left').classList.add('animate-in');
+				document.querySelector('.rectangle.right').classList.add('animate-in');
+				setTimeout(() => {
+				    window.location.href = "home.html";
+				}, 1000); 
+				    } else {
+				displayErrorMessage("⚠ 密码错误，请重试。");
+				    }
+				}
+				function displayErrorMessage(message) {
+				    if (errorContainer.children.length >= maxErrors) {
+				        errorContainer.removeChild(errorContainer.firstChild);
+				    }
+				    const errorMessageDiv = document.createElement("div");
+				    errorMessageDiv.className = "error-message";
+				    errorMessageDiv.innerText = message;
+				    errorContainer.appendChild(errorMessageDiv);
+				    setTimeout(() => {
+				        errorMessageDiv.style.animation = "slideout 0.5s forwards";
+				        setTimeout(() => {
+				            if (errorMessageDiv.parentNode) {
+				                errorContainer.removeChild(errorMessageDiv);
+				            }
+				        }, 500); 
+				    }, 2500);
+				}
+				function handleKeyPress(event) {
+				    if (event.key === "Enter") {
+				        validatePassword();
+				    }
+				}
+				function animateTitle() {
+				    const title = document.querySelector('h2');
+				    const letters = title.innerText.split('').map(letter => `<span>${letter}</span>`).join('');
+				    title.innerHTML = letters;
+				
+				    const spans = title.querySelectorAll('span');
+				    spans.forEach((span, index) => {
+				        span.style.display = 'inline-block';
+				        span.style.animation = 'glow 1s infinite alternate';
+				        span.style.animationDelay = index * 0.1 + 's';
+				    });
+				}
+				window.onload = () => {
+				                createErrorContainer();
+				    document.querySelector('.container').classList.add('show');
+				    document.getElementById("passwordInput").addEventListener('keypress', handleKeyPress);
+				    animateTitle();
+				};
+				document.onselectstart = function (event){
+				    if(window.event){
+				event = window.event;
+				}
+				    try{
+				var the = event.srcElement;
+				if (!((the.tagName == "INPUT" && the.type.toLowerCase() == "text") || the.tagName == "TEXTAREA")){
+				return false;
+				}
+				return true;
+				} 
+				    catch (e) {
+				return false;
+				    }
+				}
+				document.oncontextmenu = function (event){
+				    if(window.event){
+				    event = window.event;
+				    }
+				    try{
+				    var the = event.srcElement;
+				if (!((the.tagName == "INPUT" && the.type.toLowerCase() == "text") || the.tagName == "TEXTAREA")){
+				return false;
+				}
+				return true;
+				    }
+				    catch (e){
+				return false;
+				    }
+				}
+				window.onkeydown = window.onkeyup = window.onkeypress = function (event) {
+				    if (event.keyCode == 123) {
+				    event.preventDefault();
+				    window.event.returnValue = false;
+				    }
+				}
+				var threshold = 160; 
+				var check = setInterval(function() {
+				    if (window.outerWidth - window.innerWidth > threshold || 
+				window.outerHeight - window.innerHeight > threshold) {
+				window.location.href = 'fuck1.html';
+				    }
+				}, 100)
+				window.onkeydown = function(event) {
+				    if (event.ctrlKey && event.keyCode === 85) {
+				event.preventDefault();
+				    }
+				};
+	</script>
+</head>
+<body>
+	<div class="container">
+		<h2>欢迎您的到来</h2>
+		<div class="inputBox">
+			<input type="password" id="passwordInput" required>
+			<span>密码</span>
+			<i></i>
+		</div>
+		<button onclick="validatePassword()">
+			<span class="text">进入</span>
+		</button>
+	</div>
+	<div class="rectangle left"></div>
+	<div class="rectangle right"></div>
+</body>
+
+</html>
